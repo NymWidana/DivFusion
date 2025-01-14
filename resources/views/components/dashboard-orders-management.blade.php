@@ -26,8 +26,12 @@
             <i class="fas fa-plus"></i> Create Order
         </a>
     </div>
+    @role("admin")
+    <div><a href="/admin/dashboard/orders-management" class=" px-3 py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-center"> admin page</a></div>
+        @endrole
       </div>
     </div>
+
   </div>
 </section>
 

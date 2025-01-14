@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\Feature;
+use App\Models\Order;
+use App\Models\Review;
+use App\Models\Status;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -46,119 +49,7 @@ $usercustomer = User::factory()->create([
 ]);
 $usercustomer->assignRole('customer');
 
-Feature::create([
-    'name' => 'static website',
-    'description' => 'static',
-    'product_id' => 1,
-    'icon' => 'fas fa-globe'
-]);
-Feature::create([
-    'name' => 'basic template',
-    'description' => 'basic',
-    'product_id' => 1,
-    'icon' => 'fas fa-file-alt'
-]);
-Feature::create([
-    'name' => 'up to 5 pages',
-    'description' => '5 pages',
-    'product_id' => 1,
-    'icon' => 'fas fa-file'
-]);
-Feature::create([
-    'name' => 'responsive design',
-    'description' => 'responsive',
-    'product_id' => 1,
-    'icon' => 'fas fa-mobile-alt'
-]);
-Feature::create([
-    'name' => 'free training and consultation',
-    'description' => 'free training and consultation',
-    'product_id' => 1,
-    'icon' => 'fas fa-chalkboard-teacher'
-]);
-
-Feature::create([
-    'name' => 'dynamic website',
-    'description' => 'dynamic',
-    'product_id' => 2,
-    'icon' => 'fas fa-laptop-code'
-]);
-Feature::create([
-    'name' => 'professional template',
-    'description' => 'professional',
-    'product_id' => 2,
-    'icon' => 'fas fa-briefcase'
-]);
-Feature::create([
-    'name' => 'up to 10 pages',
-    'description' => '10 pages',
-    'product_id' => 2,
-    'icon' => 'fas fa-file'
-]);
-Feature::create([
-    'name' => 'responsive design',
-    'description' => 'responsive',
-    'product_id' => 2,
-    'icon' => 'fas fa-mobile-alt'
-]);
-Feature::create([
-    'name' => 'blog setup',
-    'description' => 'blog setup',
-    'product_id' => 2,
-    'icon' => 'fas fa-blog'
-]);
-Feature::create([
-    'name' => 'free training and consultation',
-    'description' => 'free training and consultation',
-    'product_id' => 2,
-    'icon' => 'fas fa-chalkboard-teacher'
-]);
-
-Feature::create([
-    'name' => 'full custom website',
-    'description' => 'full custom',
-    'product_id' => 3,
-    'icon' => 'fas fa-code'
-]);
-Feature::create([
-    'name' => 'custom design',
-    'description' => 'custom',
-    'product_id' => 3,
-    'icon' => 'fas fa-paint-brush'
-]);
-Feature::create([
-    'name' => 'unlimited pages',
-    'description' => 'unlimited pages',
-    'product_id' => 3,
-    'icon' => 'fas fa-infinity'
-]);
-Feature::create([
-    'name' => 'responsive design',
-    'description' => 'responsive',
-    'product_id' => 3,
-    'icon' => 'fas fa-mobile-alt'
-]);
-Feature::create([
-    'name' => 'content management system',
-    'description' => 'content management system',
-    'product_id' => 3,
-    'icon' => 'fas fa-cogs'
-]);
-Feature::create([
-    'name' => 'ongoing maintenance and support',
-    'description' => 'ongoing maintenance and support',
-    'product_id' => 3,
-    'icon' => 'fas fa-tools'
-]);
-Feature::create([
-    'name' => 'free training and consultation',
-    'description' => 'free training and consultation',
-    'product_id' => 3,
-    'icon' => 'fas fa-chalkboard-teacher'
-]);
-        
-
-        Product::create([
+Product::create([
             'title' => 'Standard Package',
             'description' => 'Perfect for small businesses looking to establish an online presence.',
         ]);
@@ -171,5 +62,127 @@ Feature::create([
             'description' => 'Best for established businesses seeking a comprehensive, custom online solution with advanced features.',
         ]);
 
+Feature::create([
+    'name' => 'static website',
+    'description' => 'static',
+    'icon' => 'fas fa-globe'
+])->products()->attach(1);
+Feature::create([
+    'name' => 'basic template',
+    'description' => 'basic',
+    'icon' => 'fas fa-file-alt'
+])->products()->attach(1);
+Feature::create([
+    'name' => 'up to 5 pages',
+    'description' => '5 pages',
+    'icon' => 'fas fa-file'
+])->products()->attach(1);
+Feature::create([
+    'name' => 'responsive design',
+    'description' => 'responsive',
+    'icon' => 'fas fa-mobile-alt'
+])->products()->attach(1);
+Feature::create([
+    'name' => 'free training and consultation',
+    'description' => 'free training and consultation',
+    'icon' => 'fas fa-chalkboard-teacher'
+])->products()->attach(1);
+
+Feature::create([
+    'name' => 'dynamic website',
+    'description' => 'dynamic',
+    'icon' => 'fas fa-laptop-code'
+])->products()->attach(2);
+Feature::create([
+    'name' => 'professional template',
+    'description' => 'professional',
+    'icon' => 'fas fa-briefcase'
+])->products()->attach(2);
+Feature::create([
+    'name' => 'up to 10 pages',
+    'description' => '10 pages',
+    'icon' => 'fas fa-file'
+])->products()->attach(2);
+Feature::create([
+    'name' => 'blog setup',
+    'description' => 'blog setup',
+    'icon' => 'fas fa-blog'
+])->products()->attach(2);
+Feature::create([
+    'name' => 'free training and consultation',
+    'description' => 'free training and consultation',
+    'icon' => 'fas fa-chalkboard-teacher'
+])->products()->attach(2);
+
+Feature::create([
+    'name' => 'full custom website',
+    'description' => 'full custom',
+    'icon' => 'fas fa-code'
+])->products()->attach(3);
+Feature::create([
+    'name' => 'custom design',
+    'description' => 'custom',
+    'icon' => 'fas fa-paint-brush'
+])->products()->attach(3);
+Feature::create([
+    'name' => 'unlimited pages',
+    'description' => 'unlimited pages',
+    'icon' => 'fas fa-infinity'
+])->products()->attach(3);
+
+Feature::create([
+    'name' => 'content management system',
+    'description' => 'content management system',
+    'icon' => 'fas fa-cogs'
+])->products()->attach(3);
+Feature::create([
+    'name' => 'ongoing maintenance and support',
+    'description' => 'ongoing maintenance and support',
+    'icon' => 'fas fa-tools'
+])->products()->attach(3);
+Feature::create([
+    'name' => 'free training and consultation',
+    'description' => 'free training and consultation',
+    'icon' => 'fas fa-chalkboard-teacher'
+])->products()->attach(3);
+
+    Order::create([
+        "orderer_name" => "widana", 
+        "orderer_phone_number" => "087758701901",
+        "message" => "hello fellas i want a standard website done in 2 month ",
+        "user_id" => 1,
+        "status" => "created",
+    ])->products()->attach(1);
+    Order::create([
+        "orderer_name" => "widana", 
+        "orderer_phone_number" => "087758701901",
+        "message" => "hello fellas i want a professional website done in 2 month ",
+        "user_id" => 2,
+        "status" => "created",
+    ])->products()->attach(2);
+    Order::create([
+        "orderer_name" => "widana", 
+        "orderer_phone_number" => "087758701901",
+        "message" => "hello fellas i want a premium website done in 2 month ",
+        "user_id" => 2,
+        "status" => "created",
+    ])->products()->attach(3);
+
+    Review::create([
+            "text" => "DivFusion made the entire process of creating our website incredibly smooth and hassle-free. The platform is intuitive, and the customization options allowed us to tailor our site exactly to our needs. The support team was always available to assist us with any questions or issues. Highly recommended!",
+            "user_id" => 1
+        ]);
+            Review::create([
+            "text" => "DivFusion made the entire process of creating our website incredibly smooth and hassle-free. The platform is intuitive, and the customization options allowed us to tailor our site exactly to our needs. The support team was always available to assist us with any questions or issues. Highly recommended!",
+            "user_id" => 1
+        ]);
+            Review::create([
+            "text" => "DivFusion made the entire process of creating our website incredibly smooth and hassle-free. The platform is intuitive, and the customization options allowed us to tailor our site exactly to our needs. The support team was always available to assist us with any questions or issues. Highly recommended!",
+            "user_id" => 1
+        ]);
+            Review::create([
+            "text" => "DivFusion made the entire process of creating our website incredibly smooth and hassle-free. The platform is intuitive, and the customization options allowed us to tailor our site exactly to our needs. The support team was always available to assist us with any questions or issues. Highly recommended!",
+            "user_id" => 1
+        ]);
     }
 }

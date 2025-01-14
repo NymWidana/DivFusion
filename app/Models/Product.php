@@ -16,6 +16,6 @@ class Product extends Model
         return $this->belongsToMany(Order::class);
     }
     public function features(){
-        return $this->hasMany(Feature::class);
+        return $this->belongsToMany(Feature::class);
     }
 }

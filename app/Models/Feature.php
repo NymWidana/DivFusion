@@ -10,9 +10,8 @@ class Feature extends Model
      
     protected $fillable = [    'name',
     'description',
-    'product_id',
     'icon'];
-    public function product(){
-        return $this->belongsTo(Product::class);
+    public function products(){
+        return $this->belongsToMany(Product::class);
     }
 }

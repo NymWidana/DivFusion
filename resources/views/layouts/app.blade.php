@@ -12,7 +12,11 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="/asset/fontawesome-free/css/all.min.css">
-
+<style>/* Custom scrollbar styling */
+ .overflow-x-auto::-webkit-scrollbar { height: 8px; } 
+ .overflow-x-auto::-webkit-scrollbar-thumb { background-color: rgba(0, 0, 0, 0.5); border-radius: 4px; } 
+ .overflow-x-auto::-webkit-scrollbar-track { background-color: transparent; }
+ </style>
         <script src="/asset/fontawesome-free/js/all.min.js"></script>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -123,8 +127,7 @@
 
 <!-- WhatsApp Floating Button -->
 <a href="https://wa.me/087758702901" class="fixed bottom-10 right-10 flex items-center space-x-2 z-50 group" target="_blank">
-    <span class="ml-2 text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">Feel free to ask us questions</span>
-    <div class="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg dark:bg-green-400">
+    <div title="feel free to ask us anything" class="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg dark:bg-green-400">
         <i class="fa-brands fa-whatsapp h-12"></i>
     </div>
 </a>
@@ -140,6 +143,8 @@
         } // Update the favicon on page load 
         updateFavicon(); // Listen for changes in the color scheme 
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon); 
-        </script>
+         </script>
+    
+
     </body>
 </html>

@@ -62,7 +62,7 @@ class OrderController extends Controller
         if ($product) {
             $order->products()->attach($productid);
         }
-        return redirect("/dashboard/order-management")->with('success', 'Order created successfully!');
+        return redirect("/dashboard/orders-management")->with('success', 'Order created successfully!');
     }
 
 
@@ -128,7 +128,8 @@ class OrderController extends Controller
         "orderer_name" => $request->input("customer_name"),
         "orderer_phone_number" => $request->input("customer_phone_number"),
         "total_amount" => $request->input("price"),
-        "order_date" => $request->input("order_date")
+        "order_date" => $request->input("order_date"),
+        "status" => $request->input("status")
         // "message" => $request->input("message")
     ]);
     return redirect("/admin/dashboard/orders-management")->with("success", "Order updated successfully!");

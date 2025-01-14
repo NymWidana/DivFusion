@@ -4,62 +4,57 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
-    {{-- <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-    <!-- Main Content -->
-
-    <!-- Sidebar and Main Content -->
-    <div>
-    <div class="flex min-h-screen">
+    <div x-data="{ open: false }">
+    <div class="flex flex-col lg:flex-row min-h-screen">
       <!-- Sidebar -->
-      <aside class="w-64 bg-white dark:bg-gray-800 shadow-lg">
+      <aside :class="{ 'translate-x-0': open, '-translate-x-full': !open }" class="bg-white dark:bg-gray-800 shadow-lg transition-transform duration-300 lg:w-64 w-full lg:translate-x-0 fixed lg:relative top-0">
         <div class="p-6">
           <ul>
             <li class="mb-4">
-              <a href="{{ route('dashboard.option', ['option' => 'user-overview']) }}" class="text-gray-900 dark:text-gray-100"
-                >User Overview</a
+              <a href="{{ route('admin.dashboard', ['option' => 'user-overview']) }}" class="text-gray-900 dark:text-gray-100"
+                ><i class="fas fa-user"></i> User Overview</a
               >
             </li>
             <li class="mb-4">
               <a
-                href="{{ route('dashboard.option', ['option' => 'order-management']) }}"
+                href="{{ route('admin.dashboard', ['option' => 'orders-management']) }}"
                 class="text-gray-900 dark:text-gray-100"
-                >Order Management</a
+                ><i class="fas fa-box"></i> Order Management</a
               >
             </li>
             <li class="mb-4">
               <a
-                href="{{ route('dashboard.option', ['option' => 'customization-options']) }}"
+                href="{{ route('admin.dashboard', ['option' => 'customization-options']) }}"
                 class="text-gray-900 dark:text-gray-100"
-                >Customization Options</a
+                ><i class="fas fa-cogs"></i> Customization Options</a
               >
             </li>
             <li class="mb-4">
               <a
-                href="{{ route('dashboard.option', ['option' => 'support-section']) }}"
+                href="{{ route('admin.dashboard', ['option' => 'support-section']) }}"
                 class="text-gray-900 dark:text-gray-100"
-                >Support Section</a
+                ><i class="fas fa-life-ring"></i> Support Section</a
               >
             </li>
             <li class="mb-4">
-              <a href="{{ route('dashboard.option', ['option' => 'analytics']) }}" class="text-gray-900 dark:text-gray-100"
-                >Analytics</a
+              <a href="{{ route('admin.dashboard', ['option' => 'analytics']) }}" class="text-gray-900 dark:text-gray-100"
+                ><i class="fas fa-chart-line"></i> Analytics</a
               >
             </li>
           </ul>
+          <button @click="open = !open" class="lg:hidden mb-4 px-4 py-2 bg-blue-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-900">
+                    <i class="fas fa-times"></i>
+        </button>
         </div>
       </aside>
       <!-- Main Content -->
       <main class="flex-1 p-6">
+        <button @click="open = !open" class="lg:hidden mb-4 px-4 py-2 bg-blue-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-900">
+                    <i class="fas fa-bars"></i>
+        </button>
+            @role("admin")
+    <div><a href="/dashboard/orders-management" class=" px-3 py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-center">back</a></div>
+    @endrole
         @isset ($option)
         @if ($option == "user-overview")
             <x-dashboard-user-overview>
@@ -67,7 +62,7 @@
                 {{ $user->name }}
             </x-slot:username>
               <x-slot:order_finished>
-                Order finished : {{ $orders->filter(function ($order) { return $order['status'] === 'finnish'; })->count() }}
+                Order completed : {{ $orders->filter(function ($order) { return $order['status'] === 'completed'; })->count() }}
               </x-slot:order_finished>
               <x-slot:order_created>
                 Order created : {{ $orders->filter(function ($order) { return $order['status'] === 'created'; })->count() }}
@@ -78,7 +73,7 @@
             </x-dashboard-user-overview>
         @elseif ($option == "orders-management")
         @role("admin")
-            <x-admin-order-management>
+            <x-admin-orders-management>
                 <div class="container mx-auto p-4">
                     <h1 class="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">All Orders</h1>
                     <div class="overflow-x-auto">
@@ -86,11 +81,13 @@
                             <thead>
                                 <tr>
                                     <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-left text-gray-600 dark:text-gray-400">Order ID</th>
-                                    <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-left text-gray-600 dark:text-gray-400">Customer Name</th>
-                                    <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-left text-gray-600 dark:text-gray-400">Customer Phone Number</th>
+                                    <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-left text-gray-600 dark:text-gray-400">Name</th>
+                                    <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-left text-gray-600 dark:text-gray-400">Phone Number</th>
+                                    <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-left text-gray-600 dark:text-gray-400">Email</th>
                                     <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-left text-gray-600 dark:text-gray-400">Product Name</th>
                                     <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-left text-gray-600 dark:text-gray-400">Price</th>
                                     <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-left text-gray-600 dark:text-gray-400">Order Date</th>
+                                    <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-left text-gray-600 dark:text-gray-400">Status</th>
                                     <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-left text-gray-600 dark:text-gray-400">Actions</th>
                                 </tr>
                             </thead>
@@ -100,9 +97,11 @@
                                     <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">{{ $order->id }}</td>
                                     <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">{{ $order->user->name }}</td>
                                     <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">{{ $order->orderer_phone_number }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">{{ $order->user->email }}</td>
                                     <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">{{ $order->products->first()->title }}</td>
                                     <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">{{ $order->total_amount }}</td>
                                     <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">{{ $order->created_at }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">{{ $order->status }}</td>
                                     <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
                                         <a href="{{ route('orders.manage', $order->id) }}" class="text-blue-500 hover:text-blue-700">Manage</a>
                                     </td>
@@ -113,9 +112,9 @@
                     </div>
                 </div>
 
-            </x-admin-order-management>
+            </x-admin-orders-management>
             @role("customer")
-            <x-dashboard-order-management>
+            <x-dashboard-orders-management>
               <x-slot:orders>
                 <div class="container mx-auto px-4">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -145,9 +144,9 @@
                                         </p>
                                     </div>
                                     <div class="mt-4 flex flex-col space-y-2">
-                                        <button class="w-full px-3 py-1.5 bg-blue-400 hover:bg-blue-500 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                        <a href="https://wa.me/087758702901" target="_blank" class="w-full text-center px-3 py-1.5 bg-blue-400 hover:bg-blue-500 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
                                             <i class="fas fa-comments"></i> Consult
-                                        </button>
+                                        </a>
                                         <div class="flex space-x-2">
                                             <a href="{{ route('orders.edit', $order->id) }}" class="w-full px-3 py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-center">
                                                 <i class="fas fa-edit"></i> Edit
@@ -167,7 +166,7 @@
                     </div>
                 </div>
               </x-slot:orders>
-            </x-dashboard-order-management>
+            </x-dashboard-orders-management>
             @endrole
         @elseif ($option == "customization-options")
             <x-dashboard-customization-options>
@@ -185,7 +184,7 @@
                 {{ $user->name }}
             </x-slot:username>
               <x-slot:order_finished>
-                Order finished : {{ $orders->filter(function ($order) { return $order['status'] === 'finnish'; })->count() }}
+                Order completed : {{ $orders->filter(function ($order) { return $order['status'] === 'completed'; })->count() }}
               </x-slot:order_finished>
               <x-slot:order_created>
                 Order created : {{ $orders->filter(function ($order) { return $order['status'] === 'created'; })->count() }}
@@ -196,6 +195,7 @@
             </x-dashboard-user-overview>
             @endif
         @endisset
+
 
       </main>
     </div>

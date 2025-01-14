@@ -29,11 +29,15 @@
                             </div>
                             <div class="mb-4">
                                 <label for="customer_phone_number" class="block text-gray-700 dark:text-gray-300">Phone Number</label>
-                                <input type="text" id="customer_phone_number" name="customer_phone_number" value="{{ $order->products->first()->title }}" class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+                                <input type="text" id="customer_phone_number" name="customer_phone_number" value="{{ $order->orderer_phone_number }}" class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
                             </div>
                             <div class="mb-4">
                                 <label for="price" class="block text-gray-700 dark:text-gray-300">Price</label>
                                 <input type="text" id="price" name="price" value="{{ $order->total_amount }}" class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+                            </div>
+                            <div class="mb-4">
+                                <label for="status" class="block text-gray-700 dark:text-gray-300">Status</label>
+                                <input type="text" id="status" name="status" value="{{ $order->status }}" class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
                             </div>
                             <div class="mb-4">
                                 <label for="order_date" class="block text-gray-700 dark:text-gray-300">Order Date</label>

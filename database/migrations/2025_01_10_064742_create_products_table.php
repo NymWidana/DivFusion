@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Feature;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
@@ -21,12 +22,18 @@ return new class extends Migration
         });
         Schema::create('features', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Product::class);
             $table->string("name");
             $table->text("description");
             $table->string("icon");
             $table->timestamps();
         });
+        Schema::create('feature_product', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Feature::class);
+            $table->foreignIdFor(Product::class);
+            $table->timestamps();
+        });
+
     }
 
     /**

@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use App\Models\Feature;
 use App\Models\Order;
 use App\Models\Product;
@@ -11,13 +12,16 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
+use App\Models\Review;
 
 Route::middleware([RoleMiddleware::class . ':admin'])->group(function () {
     Route::get('/admin', 'AdminController@index');
     Route::get('/admin/dashboard/{option}', function (string $option) {
+    $user = Auth::user();
+    $orders = $user->orders;
     $orders = Order::with("user")->get();
-    return view('admin-dashboard', ["option" => $option, "orders" => $orders]);
-    })->middleware(['auth', 'verified'])->name('dashboard.option');
+    return view('admin-dashboard', ["option" => $option, "orders" => $orders, "user" => $user]);
+    })->middleware(['auth', 'verified'])->name('admin.dashboard');
     Route::get('/admin/orders/{order}/manage', [OrderController::class, 'manage'])->name('orders.manage')->middleware(['auth', 'verified']);
     Route::put('/admin/orders/{order}', [OrderController::class, 'savemanaged'])->name('orders.savemanaged')->middleware(['auth', 'verified']);
 });
@@ -26,9 +30,10 @@ Route::middleware([RoleMiddleware::class . ':customer'])->group(function () {
 
 });
 
+Route::post('reviews/store',[ ReviewController::class, 'store'])->middleware(['auth', 'verified'])->name('reviews.store');
 
 Route::get('/', function () {
-    return view('welcome', ["products" => Product::with("features")->get()]);
+    return view('welcome', ["products" => Product::with("features")->get(), "reviews"=>Review::with("user")->latest()->paginate(10)]);
 })->name("home");
 
 Route::get('/dashboard/{option}', function (string $option) {

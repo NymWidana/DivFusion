@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -28,7 +29,20 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                $request->validate(
+            [
+                "content" => "required"
+            ]
+        );
+        $userId = Auth::user()->id;
+
+        Review::create([
+            "text" => $request->input("content"),
+            "user_id" => $userId
+        ]);
+
+        return redirect("/")->with('success', 'Review created successfully!');
+
     }
 
     /**

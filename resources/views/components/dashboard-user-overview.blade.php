@@ -20,10 +20,10 @@
                             <i class="fas fa-chart-bar mr-2"></i> Usage Statistics
                         </h4>
                         <p class="text-gray-600 dark:text-gray-400">
-                            <i class="fas fa-check-circle mr-2"></i> {{ $order_finished }} Orders Finished
+                            <i class="fas fa-check-circle mr-2"></i> {{ $order_finished }}
                         </p>
                         <p class="text-gray-600 dark:text-gray-400">
-                            <i class="fas fa-plus-circle mr-2"></i> {{ $order_created }} Orders Created
+                            <i class="fas fa-plus-circle mr-2"></i> {{ $order_created }}
                         </p>
                     </div>
                     <div>
@@ -31,7 +31,7 @@
                             <i class="fas fa-bell mr-2"></i> Notifications
                         </h4>
                         <p class="text-gray-600 dark:text-gray-400">
-                            <i class="fas fa-envelope mr-2"></i> {{ $notification }} Notifications
+                            <i class="fas fa-envelope mr-2"></i> {{ $notification }}
                         </p>
                     </div>
                 </div>
